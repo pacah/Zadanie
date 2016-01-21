@@ -1,0 +1,16 @@
+<div class="row">
+</br>
+<p>
+  <strong>Мероприятие:</strong>
+  <%= @meeting.event %>
+</p>
+
+<p>
+  <strong>Начало:</strong>
+  <%= @meeting.start_time %>
+</p>
+
+<%= link_to 'Редактировать', edit_meeting_path(@meeting) %> |
+<%= link_to 'Назад', meetings_path %> |
+<%= link_to 'Удалить', @meeting, method: :delete, data: { confirm: 'Уверен?' } %>
+</div>

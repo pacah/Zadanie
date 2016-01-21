@@ -1,0 +1,20 @@
+<div class="top-bar">
+ <div class="top-bar-left">
+  <ul class="dropdown menu" data-dropdown-menu>
+    <li class="menu-text">
+     <%= link_to "Zadanie", root_path%>
+    </li>
+   </ul>
+ </div>
+  <div class="top-bar-right">
+	<ul class="menu">
+      <% if user_signed_in?%>
+         <li><%= link_to "Выйти", destroy_user_session_path, class: "hollow button" %></li>
+     	 <li><%= link_to current_user.email, edit_user_registration_path %></li>
+      <% else %>
+      	 <li><%= link_to "Войти", new_user_session_path, class: "hollow button" %></li>
+      <% end %>
+	</ul>
+   </div>
+
+</div>

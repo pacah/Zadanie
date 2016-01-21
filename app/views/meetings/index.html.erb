@@ -1,0 +1,78 @@
+<% if signed_in?%>
+  <div class="row">
+    <div class="small-4 columns">
+    <br>
+    <h1>События</h1>
+		<ul class="accordion" data-accordion data-allow-all-closed="true">
+		  <li class="accordion-item">
+		    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">Все события</a>
+			  <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
+			    <table>
+				  <thead>
+				    <tr>
+					  <th>Мероприятие</th>
+					  <th>Начало</th>
+					</tr>
+			      </thead>
+				<tbody>
+				<% @meetings.each do |meeting| %>
+			      <tr>
+				    <td><%= link_to meeting.event, meeting %></td>
+					<td><%= meeting.start_time.strftime("%d %b | %H : %M") %></td>
+			      </tr>
+			  	<% end %>
+			  	<%= will_paginate @meetings, renderer: FoundationPagination::Rails %>
+			      </tbody>
+				</table>
+			  </div>
+			</li>
+			<li class="accordion-item">
+			  <a href="#panel2d" role="tab" class="accordion-title" id="panel2d-heading" aria-controls="panel2d">Мои события</a>
+			  <div id="panel2d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel2d-heading">
+			    <table>
+				  <thead>
+				    <tr>
+					  <th>Мероприятие</th>
+					  <th>Начало</th>
+					</tr>
+			      </thead>
+				<tbody>
+				<% @mymeetings.each do |meeting| %>
+			      <tr>
+				    <td><%= link_to meeting.event, meeting %></td>
+					<td><%= meeting.start_time.strftime("%d %b | %H : %M") %></td>
+			      </tr>
+			  	<% end %>
+			  	<%= will_paginate @meetings, renderer: FoundationPagination::Rails %>
+			      </tbody>
+				</table>
+			  </div>
+		    </li>
+	      </ul>
+	  </div>
+  <div class="small-8 columns">   
+  <br>
+	<%= month_calendar events: @meetings do |date, meetings| %>
+	  <%= date.strftime(" %d ") %>
+	  <% meetings.each do |meeting| %>
+	    <div>
+	      <%= link_to meeting.event, edit_meeting_path(meeting) %>
+	    </div>
+	   <% end %>
+	  <% end %>
+	  <%= link_to 'Новое событие', new_meeting_path, class: "success button" %>
+	</div>
+  </div>
+
+<% else %>
+
+ <div class="text-center">
+ <br>
+ <br>
+	<h1>Мир полон событий</h1>
+      <%= link_to "Присоединиться", new_user_registration_path, class: "hollow button" %>
+</div>
+<div class="text-center"><%= image_tag("1.png")%></div>
+
+<% end %>
+
