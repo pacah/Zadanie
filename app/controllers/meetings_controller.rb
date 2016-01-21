@@ -5,12 +5,15 @@ class MeetingsController < ApplicationController
   # GET /meetings.json
   def index
     @meetings = Meeting.order('start_time ASC').paginate(page: params[:page], :per_page => 13)
-    @mymeetings = current_user.meetings.order('start_time ASC').paginate(page: params[:page], :per_page => 13)
+    if signed_in? 
+     @mymeetings = current_user.meetings.order('start_time ASC').paginate(page: params[:page], :per_page => 13)
+    end
   end
 
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+  	
   end
 
   # GET /meetings/new
@@ -72,5 +75,5 @@ class MeetingsController < ApplicationController
     def meeting_params
       params.require(:meeting).permit(:event, :start_time, :user_id)
     end
-   
+
 end

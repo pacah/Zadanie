@@ -43,7 +43,7 @@
 					<td><%= meeting.start_time.strftime("%d %b | %H : %M") %></td>
 			      </tr>
 			  	<% end %>
-			  	<%= will_paginate @meetings, renderer: FoundationPagination::Rails %>
+			  	<%= will_paginate @mymeetings, renderer: FoundationPagination::Rails %>
 			      </tbody>
 				</table>
 			  </div>

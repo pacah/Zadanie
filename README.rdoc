@@ -7,4 +7,5 @@ class String
 end
 
 p = '1'
+
 10.times {puts p; p = p.siq}
